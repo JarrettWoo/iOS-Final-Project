@@ -30,13 +30,16 @@ class GameViewController: UIViewController {
     private let itemSizeHeight:CGFloat = 75.0
     private var items = [UIButton]()
     
+    
+    // MARK: - ==== View Controller Methods ====
+    //================================================
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
         //creating a tap gesture recognizer programatically and giving it an action to do
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapView(_:)))
@@ -50,7 +53,8 @@ class GameViewController: UIViewController {
     
     //Reference to our label that says welcome or paused etc.
     @IBOutlet weak var statusLabel: UILabel!
-    
+    // Reference to tower that user will slide back and forth
+    @IBOutlet weak var tower: UIImageView!
     
     //action that occurs when we do a two finger tap on Game Scene
     @IBAction func didTapView(_ sender: UITapGestureRecognizer) {
@@ -62,7 +66,10 @@ class GameViewController: UIViewController {
         
     }
 
-
+    // MARK: - ==== Internal Properties ====
+    //================================================
+    
+    
 }
 
 
@@ -86,12 +93,29 @@ extension GameViewController {
         
         print("item has been created")
     }
-    
+
+    //================================================
     private func moveItems(){
         for item in items {
             item.frame.origin.y += 0.1
         }
     }
+    
+
+    //================================================
+    // Action that causes tower to slide back and forth with user's finger
+    @IBAction func handlePan(_ gesture: UIPanGestureRecognizer) {
+        let translation = gesture.translation(in: view)
+        
+        guard let gestureView = gesture.view else {
+            return
+        }
+        
+        gestureView.center = CGPoint(x: gestureView.center.x + translation.x, y: gestureView.center.y)
+        
+        gesture.setTranslation(.zero, in: view)
+    }
+
     
 }
 
