@@ -92,14 +92,32 @@ extension GameViewController {
         self.view.addSubview(item)
         
         print("item has been created")
+        
+    
     }
 
     //================================================
     private func moveItems(){
         for item in items {
             item.frame.origin.y += 0.1
+            
+            if(item.frame.origin.y > tower.frame.origin.y && item.frame.origin.y < tower.frame.origin.y + 40 && tower.frame.origin.x > item.frame.origin.x - 25 && tower.frame.origin.x < item.frame.origin.x + 25){
+                growTower();
+            }
+            
         }
     }
+    
+    private func growTower(){
+        
+        var newFrame = tower.frame
+        newFrame.size.height = newFrame.size.height + itemSizeHeight
+        newFrame.origin.y = newFrame.origin.y - itemSizeHeight
+        tower.frame = newFrame
+        
+    }
+    
+    
     
 
     //================================================
@@ -124,6 +142,11 @@ extension GameViewController {
 extension GameViewController{
     
     private func startGameRunning(){
+        
+        var newFrame = tower.frame
+        newFrame.size.height = 123
+        newFrame.origin.y = 673
+        tower.frame = newFrame
         
         gameTimer = Timer.scheduledTimer(withTimeInterval: gameDuration,
         repeats: false)
@@ -150,6 +173,7 @@ extension GameViewController{
         
         if let timerDrop = dropTimer { timerDrop.invalidate() }
         self.dropTimer = nil
+    
     }
     
 }
