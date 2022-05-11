@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AC3197BD282B3FB700454F62 /* ConfigViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3197BC282B3FB700454F62 /* ConfigViewController.swift */; };
+		AC3197BF282B54E300454F62 /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3197BE282B54E300454F62 /* GameManager.swift */; };
 		AC91A2D42810D5F400D4D45C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC91A2D32810D5F400D4D45C /* AppDelegate.swift */; };
 		AC91A2D62810D5F400D4D45C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC91A2D52810D5F400D4D45C /* SceneDelegate.swift */; };
 		AC91A2D82810D5F400D4D45C /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC91A2D72810D5F400D4D45C /* GameViewController.swift */; };
@@ -37,6 +39,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AC3197BC282B3FB700454F62 /* ConfigViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigViewController.swift; sourceTree = "<group>"; };
+		AC3197BE282B54E300454F62 /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
 		AC91A2D02810D5F400D4D45C /* IOSFinalProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IOSFinalProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC91A2D32810D5F400D4D45C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AC91A2D52810D5F400D4D45C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -104,8 +108,10 @@
 				AC91A2D32810D5F400D4D45C /* AppDelegate.swift */,
 				AC91A2D52810D5F400D4D45C /* SceneDelegate.swift */,
 				AC91A2D72810D5F400D4D45C /* GameViewController.swift */,
+				AC3197BC282B3FB700454F62 /* ConfigViewController.swift */,
 				AC91A3032810E7D100D4D45C /* Utility.swift */,
 				AC91A2D92810D5F400D4D45C /* Main.storyboard */,
+				AC3197BE282B54E300454F62 /* GameManager.swift */,
 				AC91A2DC2810D5F700D4D45C /* Assets.xcassets */,
 				AC91A2DE2810D5F700D4D45C /* LaunchScreen.storyboard */,
 				AC91A2E12810D5F700D4D45C /* Info.plist */,
@@ -262,8 +268,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				AC91A3042810E7D100D4D45C /* Utility.swift in Sources */,
+				AC3197BF282B54E300454F62 /* GameManager.swift in Sources */,
 				AC91A2D82810D5F400D4D45C /* GameViewController.swift in Sources */,
 				AC91A2D42810D5F400D4D45C /* AppDelegate.swift in Sources */,
+				AC3197BD282B3FB700454F62 /* ConfigViewController.swift in Sources */,
 				AC91A2D62810D5F400D4D45C /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
