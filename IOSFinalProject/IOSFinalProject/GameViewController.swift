@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class GameViewController: UIViewController {
     
@@ -30,12 +31,14 @@ class GameViewController: UIViewController {
     
     //Game Items
     private var randomAlpha = false
+    private let itemSizeWidth:CGFloat = 50.0
+    private let itemSizeHeight:CGFloat = 75.0
+    
+    // MARK: - ==== Internal Properties ====
+    //================================================
     private enum gameState {case inGame, paused, noGame}
     private var gameStatus = gameState.noGame
     
-    private var gameInProgress = false
-    private let itemSizeWidth:CGFloat = 50.0
-    private let itemSizeHeight:CGFloat = 75.0
     private var items = [UIButton]()
     private var score: Int = 0 {
     didSet { scoreLabel?.text = scoreInfo } }
@@ -45,6 +48,10 @@ class GameViewController: UIViewController {
         return labelText
     }
     
+    // Audio
+    var player: AVAudioPlayer!
+    var music: AVAudioPlayer!
+
     
     // MARK: - ==== View Controller Methods ====
     //================================================
@@ -98,11 +105,22 @@ class GameViewController: UIViewController {
         }
         
     }
-
-    // MARK: - ==== Internal Properties ====
+    
+    // MARK: - ==== Audio Functions ====
     //================================================
+    func playSound(soundName: String) {
+        let url = Bundle.main.url(forResource: soundName, withExtension: "wav")
+        player = try! AVAudioPlayer(contentsOf: url!)
+        player.play()
+                
+    }
     
-    
+    func playSong(soundName: String) {
+        let url = Bundle.main.url(forResource: soundName, withExtension: "wav")
+        music = try! AVAudioPlayer(contentsOf: url!)
+        music.play()
+                
+    }
 }
 
 
@@ -126,9 +144,6 @@ extension GameViewController {
         
         self.view.addSubview(item)
         
-        print("item has been created")
-        
-    
     }
 
     //================================================
@@ -155,6 +170,7 @@ extension GameViewController {
             item.frame.origin.y += 0.1
             
             if(item.frame.origin.y > tower.frame.origin.y && item.frame.origin.y < tower.frame.origin.y + 40 && tower.frame.origin.x > item.frame.origin.x - 25 && tower.frame.origin.x < item.frame.origin.x + 25){
+                playSound(soundName: "ding")
                 score += 1
                 growTower();
                 item.alpha = 0.0;
@@ -162,6 +178,7 @@ extension GameViewController {
             }
             else if(item.frame.origin.y >= view.bounds.size.height && item.frame.origin.x < view.bounds.size.width){
                 stopGameRunning()
+                playSound(soundName: "fail")
                 removeSavedRectangles()
                 statusLabel.text = "Game Over"
                 statusLabel.textColor = UIColor.red
@@ -212,10 +229,8 @@ extension GameViewController {
 extension GameViewController{
     
     private func startGameRunning(){
-
-        if (gameStatus != .noGame){
-            return
-        }
+        
+        if (gameStatus != .noGame){return}
         gameStatus = .inGame
         score = 0
         gameDuration = 3750.0
@@ -223,6 +238,8 @@ extension GameViewController{
         newFrame.size.height = 123
         newFrame.origin.y = 673
         tower.frame = newFrame
+        
+        playSong(soundName: "song")
         
         gameTimer = Timer.scheduledTimer(withTimeInterval: gameDuration,
         repeats: false)
@@ -248,6 +265,7 @@ extension GameViewController{
         if(gameStatus != .inGame){
             return
         }
+        music.stop()
         
         if let timer = gameTimer { timer.invalidate() }
         // Remove the reference to the timer object
@@ -268,6 +286,7 @@ extension GameViewController{
             return
         }
         
+        playSong(soundName: "song")
         
         gameTimer = Timer.scheduledTimer(withTimeInterval: gameDuration,
         repeats: false)
@@ -292,6 +311,8 @@ extension GameViewController{
     
     
     private func stopGameRunning(){
+        
+        music.stop()
         
         if let timer = gameTimer { timer.invalidate() }
         // Remove the reference to the timer object
